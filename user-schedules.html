@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room Schedules | RoomQ Student &amp; Faculty Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="user-style.css" />
+  </head>
+  <body>
+    <div class="app-shell user-shell">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark user-mark">RQ</div>
+          <div class="brand-copy">
+            <strong>RoomQ</strong>
+            <span class="portal-tag">User Portal</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Student &amp; Faculty navigation">
+          <a href="user.html" class="nav-item"><span class="nav-icon">◫</span>Dashboard</a>
+          <a href="user-classrooms.html" class="nav-item"><span class="nav-icon">▣</span>Classroom Explorer</a>
+          <a href="user-schedules.html" class="nav-item active" aria-current="page"><span class="nav-icon">▤</span>Room Schedules</a>
+          <a href="user.html#quick-finder" class="nav-item"><span class="nav-icon">◌</span>Find Free Room</a>
+          <a href="user.html#my-requests" class="nav-item"><span class="nav-icon">◍</span>My Reservations</a>
+          <a href="index.html" class="nav-item" style="margin-top: 18px; border: 1px dashed rgba(255,255,255,0.22);"><span class="nav-icon">🔒</span>Admin View</a>
+        </nav>
+
+        <div class="profile-box">
+          <div class="mini-avatar" style="background: linear-gradient(135deg, #10b981, #38ef7d); color: #032b18;">SR</div>
+          <div>
+            <strong>Sofia Ramirez</strong>
+            <span>Student · BSIT 3-A</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content user-main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">NORSU-MC 1 <span id="todayDate"></span> · Student &amp; Faculty View</p>
+            <h1>Campus Classroom Schedules</h1>
+          </div>
+          <div class="topbar-actions">
+            <a href="index.html" class="role-switch-pill" title="Go to Admin Portal">
+              <span class="role-badge">ADMIN</span>
+              <span>Admin Portal ➔</span>
+            </a>
+            <div class="user-pill">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #10b981, #38ef7d); color: #032b18;">SR</div>
+              <div>
+                <strong>Sofia Ramirez</strong>
+                <span>NORSU Student</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Filter Controls -->
+        <section class="finder-panel">
+          <div class="finder-header-row" style="margin-bottom: 12px;">
+            <div>
+              <p class="panel-kicker">Schedule Directory</p>
+              <h2 style="margin: 0; font-size: 1.3rem; color: var(--roomq-blue-strong);">Inspect Daily Class Timetables</h2>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--roomq-muted);">Check booked class hours and find open study windows</span>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; align-items: flex-end;">
+            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 0.75rem; font-weight: 700; color: var(--roomq-ink);">
+              <span>Building</span>
+              <select id="schedBuildingSelect" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.15); font-size: 0.84rem; background: #fff;">
+              </select>
+            </label>
+
+            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 0.75rem; font-weight: 700; color: var(--roomq-ink);">
+              <span>Floor</span>
+              <select id="schedFloorSelect" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.15); font-size: 0.84rem; background: #fff;">
+              </select>
+            </label>
+
+            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 0.75rem; font-weight: 700; color: var(--roomq-ink);">
+              <span>Date</span>
+              <input type="date" id="schedDateInput" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.15); font-size: 0.84rem; background: #fff;" />
+            </label>
+
+            <button type="button" class="campus-button primary" id="schedRefreshBtn" style="padding: 10px 18px; border-radius: 12px;">
+              Refresh Schedule
+            </button>
+          </div>
+        </section>
+
+        <!-- Schedules Grid/Table Section -->
+        <section class="reservations-board" aria-labelledby="schedTableHeading">
+          <div class="reservations-header">
+            <div>
+              <p class="panel-kicker">Matrix View</p>
+              <h2 id="schedTableHeading" style="margin: 0; font-size: 1.25rem; color: var(--roomq-blue-strong);">Classroom Schedule Matrix</h2>
+            </div>
+            <div style="display: flex; gap: 12px; font-size: 0.74rem;">
+              <span style="display: flex; align-items: center; gap: 6px;"><i style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></i> Available for Study</span>
+              <span style="display: flex; align-items: center; gap: 6px;"><i style="width: 8px; height: 8px; border-radius: 50%; background: #64748b; display: inline-block;"></i> Class In Session</span>
+            </div>
+          </div>
+
+          <div id="scheduleMatrixContainer" class="schedule-table-wrap">
+            <!-- Dynamically populated -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="roomq-time.js"></script>
+    <script src="classroom-explorer.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const bSelect = document.getElementById('schedBuildingSelect');
+        const fSelect = document.getElementById('schedFloorSelect');
+        const dInput = document.getElementById('schedDateInput');
+        const refreshBtn = document.getElementById('schedRefreshBtn');
+        const container = document.getElementById('scheduleMatrixContainer');
+        const roomUseStorageKey = 'roomq.roomUsage.v1';
+
+        const localDate = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+        dInput.value = localDate;
+
+        const buildings = (window.RoomQ && window.RoomQ.buildings) || [];
+
+        function initBuildings() {
+          bSelect.replaceChildren();
+          buildings.forEach(b => {
+            bSelect.append(new Option(b.name, b.id));
+          });
+          updateFloors();
+        }
+
+        function updateFloors() {
+          const b = buildings.find(item => item.id === bSelect.value);
+          fSelect.replaceChildren();
+          if (b && b.floors) {
+            b.floors.forEach(f => {
+              fSelect.append(new Option(f.label, f.id));
+            });
+          }
+          renderSchedule();
+        }
+
+        function getRoomLabel(floor, index, region) {
+          const num = region.roomNumber !== undefined ? region.roomNumber : Number(floor.id) * 100 + index + 1;
+          if (region.name) {
+            return num === null ? region.name : `Room ${num} · ${region.name}`;
+          }
+          return `Room ${num}`;
+        }
+
+        function renderSchedule() {
+          container.replaceChildren();
+          const b = buildings.find(item => item.id === bSelect.value);
+          const f = b && b.floors.find(item => item.id === fSelect.value);
+          const date = dInput.value;
+
+          if (!b || !f || !f.regions.length) {
+            container.innerHTML = '<p style="padding: 32px; text-align: center; color: var(--roomq-muted);">No rooms found for this building and floor.</p>';
+            return;
+          }
+
+          let usageRecords = [];
+          try {
+            const raw = localStorage.getItem(roomUseStorageKey);
+            usageRecords = raw ? JSON.parse(raw) : [];
+          } catch(e) {
+            usageRecords = [];
+          }
+
+          const nowTime = `${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`;
+
+          const table = document.createElement('table');
+          table.className = 'user-schedule-table';
+          table.innerHTML = `
+            <thead>
+              <tr>
+                <th style="min-width: 140px;">Classroom</th>
+                <th style="min-width: 120px;">Current Status</th>
+                <th style="min-width: 320px;">Recorded Schedule (${date})</th>
+                <th style="min-width: 130px; text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${f.regions.map((reg, index) => {
+                const label = getRoomLabel(f, index, reg);
+                const recs = usageRecords.filter(r =>
+                  r.buildingId === b.id &&
+                  r.floorId === f.id &&
+                  r.regionId === reg.id &&
+                  r.date === date
+                ).sort((x, y) => x.startTime.localeCompare(y.startTime));
+
+                const isCurrentActive = recs.some(r => r.startTime <= nowTime && nowTime < r.endTime);
+
+                return `
+                  <tr>
+                    <td>
+                      <strong style="color: var(--roomq-blue-strong); font-size: 0.94rem;">${label}</strong>
+                      <span style="display: block; font-size: 0.72rem; color: var(--roomq-muted); margin-top: 2px;">${b.name} · ${f.label}</span>
+                    </td>
+                    <td>
+                      ${isCurrentActive
+                        ? '<span class="room-status-badge occupied"><span class="pulse-dot"></span> In Session</span>'
+                        : '<span class="room-status-badge available"><span class="pulse-dot"></span> Available</span>'
+                      }
+                    </td>
+                    <td>
+                      ${recs.length === 0
+                        ? '<span style="color: #047857; font-weight: 700; font-size: 0.78rem;">✓ No classes scheduled — Open for study all day</span>'
+                        : recs.map(r => `
+                            <div style="margin-bottom: 5px;">
+                              <span class="time-slot-tag">${window.RoomQTime ? window.RoomQTime.format(r.startTime) : r.startTime} – ${window.RoomQTime ? window.RoomQTime.format(r.endTime) : r.endTime}</span>
+                              <span style="font-size: 0.72rem; color: var(--roomq-muted); margin-left: 6px;">Class In Session</span>
+                            </div>
+                          `).join('')
+                      }
+                    </td>
+                    <td style="text-align: right;">
+                      <a href="user.html" class="btn-card-schedule" style="text-decoration: none; display: inline-flex; padding: 6px 12px;">
+                        <span>📅</span> Request Room
+                      </a>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          `;
+          container.append(table);
+        }
+
+        bSelect.addEventListener('change', updateFloors);
+        fSelect.addEventListener('change', renderSchedule);
+        dInput.addEventListener('change', renderSchedule);
+        refreshBtn.addEventListener('click', renderSchedule);
+
+        initBuildings();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RoomQ | Student &amp; Faculty Classroom Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="user-style.css" />
+  </head>
+  <body>
+    <div class="app-shell user-shell">
+      <!-- User Sidebar -->
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark user-mark">RQ</div>
+          <div class="brand-copy">
+            <strong>RoomQ</strong>
+            <span class="portal-tag">User Portal</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Student & Faculty navigation">
+          <a href="user.html" class="nav-item active"><span class="nav-icon">◫</span>Dashboard</a>
+          <a href="user-classrooms.html" class="nav-item"><span class="nav-icon">▣</span>Classroom Explorer</a>
+          <a href="user-schedules.html" class="nav-item"><span class="nav-icon">▤</span>Room Schedules</a>
+          <a href="#quick-finder" class="nav-item"><span class="nav-icon">◌</span>Find Free Room</a>
+          <a href="#my-requests" class="nav-item"><span class="nav-icon">◍</span>My Reservations</a>
+          <a href="index.html" class="nav-item" style="margin-top: 18px; border: 1px dashed rgba(255,255,255,0.22);"><span class="nav-icon">🔒</span>Admin View</a>
+        </nav>
+
+        <div class="profile-box">
+          <div class="mini-avatar" style="background: linear-gradient(135deg, #10b981, #38ef7d); color: #032b18;">SR</div>
+          <div>
+            <strong>Sofia Ramirez</strong>
+            <span>Student · BSIT 3-A</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main User Content Area -->
+      <main class="main-content user-main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">NORSU-MC 1 <span id="todayDate"></span> · Student &amp; Faculty View</p>
+            <h1>Classroom Availability Finder</h1>
+          </div>
+
+          <div class="topbar-actions">
+            <span class="user-live-indicator" title="Live clock sync">
+              <span class="pulse-dot-green"></span>
+              Live: <strong id="userLiveTimeDisplay" style="margin-left: 2px;">--:--</strong>
+            </span>
+
+            <a href="index.html" class="role-switch-pill" title="Go to Admin Management Portal">
+              <span class="role-badge">ADMIN</span>
+              <span>Admin Portal ➔</span>
+            </a>
+
+            <div class="user-pill">
+              <div class="user-avatar" style="background: linear-gradient(135deg, #10b981, #38ef7d); color: #032b18;">SR</div>
+              <div>
+                <strong>Sofia Ramirez</strong>
+                <span>NORSU Student</span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- User Campus Hero -->
+        <section class="campus-hero" aria-labelledby="user-hero-title">
+          <div class="campus-hero-copy">
+            <p class="campus-kicker"><span></span> NORSU · Main Campus 1</p>
+            <h2 id="user-hero-title">Need a place to study or conduct classes?</h2>
+            <p class="campus-description">
+              Find empty classrooms right now across campus. View real-time availability, check schedules, or request a room reservation.
+            </p>
+            <div class="campus-actions">
+              <a class="campus-button primary" href="#quick-finder">Find free rooms now <span>↓</span></a>
+              <a class="campus-button secondary" href="user-classrooms.html">Explore floor layout <span>→</span></a>
+              <button type="button" class="campus-button secondary" onclick="window.openRoomReservationModal()">＋ Request room</button>
+            </div>
+            <div class="campus-note"><span class="campus-dot" style="background: #10b981;"></span> Real-time status synced with Academic Scheduling.</div>
+          </div>
+
+          <!-- Interactive Campus Visual Hub -->
+          <div class="campus-hub-card" id="campus-map">
+            <div class="campus-hub-header">
+              <span class="campus-hub-title"><span style="color: #38ef7d;">⌖</span> Campus Learning Hub</span>
+              <span class="campus-hub-badge">7 Buildings Active</span>
+            </div>
+
+            <!-- Stylized Isometric Campus Vector Map -->
+            <div class="campus-hub-map">
+              <svg viewBox="0 0 460 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-height: 180px;">
+                <defs>
+                  <linearGradient id="bldgGlow" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#3781fc" stop-opacity="0.8" />
+                    <stop offset="100%" stop-color="#1951fc" stop-opacity="0.6" />
+                  </linearGradient>
+                  <linearGradient id="activeGreen" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#34d399" stop-opacity="0.9" />
+                    <stop offset="100%" stop-color="#059669" stop-opacity="0.8" />
+                  </linearGradient>
+                </defs>
+                <!-- Campus Ground Grid Lines -->
+                <path d="M40 180 L230 70 L420 180" stroke="rgba(255,255,255,0.15)" stroke-dasharray="4 4" stroke-width="1.2" />
+                <path d="M100 190 L230 110 L360 190" stroke="rgba(255,255,255,0.15)" stroke-dasharray="4 4" stroke-width="1.2" />
+
+                <!-- CAS Building Block -->
+                <g style="cursor: pointer;" data-map-bldg="cas" transform="translate(60, 95)">
+                  <polygon points="40,0 80,20 40,40 0,20" fill="url(#bldgGlow)" stroke="#cbe9fd" stroke-width="1" />
+                  <polygon points="0,20 40,40 40,75 0,55" fill="#0b2cb1" opacity="0.8" />
+                  <polygon points="40,40 80,20 80,55 40,75" fill="#1951fc" opacity="0.9" />
+                  <text x="40" y="32" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">CAS</text>
+                </g>
+
+                <!-- CBA Building Block -->
+                <g style="cursor: pointer;" data-map-bldg="cba" transform="translate(150, 50)">
+                  <polygon points="35,0 70,18 35,36 0,18" fill="url(#bldgGlow)" stroke="#cbe9fd" stroke-width="1" />
+                  <polygon points="0,18 35,36 35,65 0,47" fill="#0b2cb1" opacity="0.8" />
+                  <polygon points="35,36 70,18 70,47 35,65" fill="#1951fc" opacity="0.9" />
+                  <text x="35" y="28" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">CBA</text>
+                </g>
+
+                <!-- CTHM Building Block -->
+                <g style="cursor: pointer;" data-map-bldg="cthm" transform="translate(240, 50)">
+                  <polygon points="35,0 70,18 35,36 0,18" fill="url(#bldgGlow)" stroke="#cbe9fd" stroke-width="1" />
+                  <polygon points="0,18 35,36 35,65 0,47" fill="#0b2cb1" opacity="0.8" />
+                  <polygon points="35,36 70,18 70,47 35,65" fill="#1951fc" opacity="0.9" />
+                  <text x="35" y="28" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">CTHM</text>
+                </g>
+
+                <!-- CIT Building Block -->
+                <g style="cursor: pointer;" data-map-bldg="cit" transform="translate(325, 95)">
+                  <polygon points="45,0 90,22 45,44 0,22" fill="url(#bldgGlow)" stroke="#cbe9fd" stroke-width="1" />
+                  <polygon points="0,22 45,44 45,78 0,56" fill="#0b2cb1" opacity="0.8" />
+                  <polygon points="45,44 90,22 90,56 45,78" fill="#1951fc" opacity="0.9" />
+                  <text x="45" y="34" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">CIT</text>
+                </g>
+
+                <!-- CNPAHS Building Block -->
+                <g style="cursor: pointer;" data-map-bldg="cnpahs" transform="translate(110, 130)">
+                  <polygon points="35,0 70,18 35,36 0,18" fill="url(#activeGreen)" stroke="#a7f3d0" stroke-width="1" />
+                  <polygon points="0,18 35,36 35,60 0,42" fill="#065f46" opacity="0.8" />
+                  <polygon points="35,36 70,18 70,42 35,60" fill="#059669" opacity="0.9" />
+                  <text x="35" y="28" fill="#ffffff" font-size="8" font-weight="800" text-anchor="middle">CNPAHS</text>
+                </g>
+
+                <!-- ST Building Block -->
+                <g style="cursor: pointer;" data-map-bldg="st" transform="translate(200, 125)">
+                  <polygon points="40,0 80,20 40,40 0,20" fill="url(#bldgGlow)" stroke="#cbe9fd" stroke-width="1" />
+                  <polygon points="0,20 40,40 40,75 0,55" fill="#0b2cb1" opacity="0.8" />
+                  <polygon points="40,40 80,20 80,55 40,75" fill="#1951fc" opacity="0.9" />
+                  <text x="40" y="32" fill="#ffffff" font-size="9" font-weight="800" text-anchor="middle">ST BLDG</text>
+                </g>
+
+                <!-- CTED Building Block -->
+                <g style="cursor: pointer;" data-map-bldg="cted" transform="translate(295, 130)">
+                  <polygon points="35,0 70,18 35,36 0,18" fill="url(#bldgGlow)" stroke="#cbe9fd" stroke-width="1" />
+                  <polygon points="0,18 35,36 35,60 0,42" fill="#0b2cb1" opacity="0.8" />
+                  <polygon points="35,36 70,18 70,42 35,60" fill="#1951fc" opacity="0.9" />
+                  <text x="35" y="28" fill="#ffffff" font-size="8" font-weight="800" text-anchor="middle">CTED</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="campus-hub-footer">
+              <span>Click any building above to filter rooms</span>
+              <span>Total: <strong>97 Classrooms</strong></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats Overview Cards -->
+        <section class="dashboard-stats" aria-label="Real-time availability metrics">
+          <article class="summary-card summary-primary">
+            <div class="summary-icon" style="background: rgba(16, 185, 129, 0.15); color: #059669;">✓</div>
+            <div>
+              <p>Available Now</p>
+              <strong id="userStatAvailable">—</strong>
+            </div>
+            <span class="summary-accent" style="background: #10b981;"></span>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-icon navy">◐</div>
+            <div>
+              <p>In Session / Occupied</p>
+              <strong id="userStatOccupied">—</strong>
+            </div>
+            <span class="summary-accent"></span>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-icon sky">▣</div>
+            <div>
+              <p>Total Classrooms</p>
+              <strong id="userStatTotal">—</strong>
+            </div>
+            <span class="summary-accent"></span>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-icon accent">◍</div>
+            <div>
+              <p>My Reservations</p>
+              <strong id="userStatRequests">0</strong>
+            </div>
+            <span class="summary-accent"></span>
+          </article>
+        </section>
+
+        <!-- Quick Classroom Finder Section -->
+        <section class="finder-panel" id="quick-finder" aria-labelledby="finder-heading">
+          <div class="finder-header-row">
+            <div>
+              <p class="panel-kicker">Live Classroom Finder</p>
+              <h2 id="finder-heading">Search &amp; Filter Learning Spaces</h2>
+            </div>
+            <button type="button" class="campus-button primary" onclick="window.openRoomReservationModal()">
+              <span>＋</span> Request Room Booking
+            </button>
+          </div>
+
+          <!-- Finder Toolbar -->
+          <div class="finder-toolbar">
+            <div class="search-and-sort-row">
+              <div class="user-search-input-wrap">
+                <span class="user-search-icon">⌕</span>
+                <input type="text" id="userSearchInput" placeholder="Search by room name, number, building, or lab (e.g. 307, Speech Lab, Skylab, CAS)..." />
+                <button type="button" class="search-clear-btn" id="searchClearBtn" aria-label="Clear search">✕</button>
+              </div>
+
+              <div class="sort-select-wrap">
+                <select id="userSortSelect" aria-label="Sort classrooms">
+                  <option value="default">Sort: Default</option>
+                  <option value="status">Sort: Available First 🟢</option>
+                  <option value="room-asc">Sort: Room Name / No.</option>
+                  <option value="capacity-desc">Sort: Capacity (High to Low)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Building Filter Pills -->
+            <div class="filter-pills-bar">
+              <span class="filter-group-label">Building:</span>
+              <button type="button" class="user-pill-btn active" data-building="all">All <span class="pill-count">97</span></button>
+              <button type="button" class="user-pill-btn" data-building="cas">CAS <span class="pill-count">15</span></button>
+              <button type="button" class="user-pill-btn" data-building="cba">CBA <span class="pill-count">12</span></button>
+              <button type="button" class="user-pill-btn" data-building="cthm">CTHM <span class="pill-count">13</span></button>
+              <button type="button" class="user-pill-btn" data-building="cnpahs">CNPAHS <span class="pill-count">13</span></button>
+              <button type="button" class="user-pill-btn" data-building="cit">CIT <span class="pill-count">24</span></button>
+              <button type="button" class="user-pill-btn" data-building="st">ST <span class="pill-count">15</span></button>
+              <button type="button" class="user-pill-btn" data-building="cted">CTED <span class="pill-count">5</span></button>
+            </div>
+
+            <!-- Status & Type Filter Pills -->
+            <div class="filter-pills-bar">
+              <span class="filter-group-label">Status:</span>
+              <button type="button" class="user-pill-btn active" data-status="all">All Rooms <span class="pill-count">97</span></button>
+              <button type="button" class="user-pill-btn status-available" data-status="available">Available Now 🟢 <span class="pill-count">—</span></button>
+              <button type="button" class="user-pill-btn status-occupied" data-status="occupied">Occupied 🔴 <span class="pill-count">—</span></button>
+
+              <span class="filter-group-label" style="margin-left: 10px;">Type:</span>
+              <button type="button" class="user-pill-btn active" data-type="all">All Spaces</button>
+              <button type="button" class="user-pill-btn" data-type="lecture">Lecture Rooms</button>
+              <button type="button" class="user-pill-btn" data-type="lab">Laboratories</button>
+            </div>
+          </div>
+
+          <!-- Results Summary Header -->
+          <div class="results-summary-bar">
+            <h3>
+              <span>Classroom Directory</span>
+              <span class="results-tag" id="resultsCount">Loading classrooms...</span>
+            </h3>
+            <span style="font-size: 0.74rem; color: var(--roomq-muted);">Live status updates automatically</span>
+          </div>
+
+          <!-- Room Cards Grid -->
+          <div class="user-room-grid" id="userRoomGrid" aria-live="polite">
+            <!-- Dynamically populated by user-portal.js -->
+          </div>
+
+          <!-- Empty State -->
+          <div class="user-empty-state" id="userEmptyState" hidden>
+            <div class="empty-icon">🔍</div>
+            <h3 style="margin: 0 0 4px 0; color: var(--roomq-blue-strong);">No matching classrooms found</h3>
+            <p style="margin: 0;">Try adjusting your search query, building filter, or status selection.</p>
+          </div>
+        </section>
+
+        <!-- My Reservations Panel -->
+        <section class="reservations-board" id="my-requests" aria-labelledby="requests-heading">
+          <div class="reservations-header">
+            <div>
+              <p class="panel-kicker">My Bookings</p>
+              <h2 id="requests-heading">My Room Reservation Requests</h2>
+            </div>
+            <button type="button" class="campus-button primary" onclick="window.openRoomReservationModal()">
+              <span>＋</span> New Request
+            </button>
+          </div>
+          <p style="margin: 0 0 14px 0; font-size: 0.8rem; color: var(--roomq-muted);">
+            Requests submitted by you for study sessions, makeup classes, or student organization activities.
+          </p>
+
+          <div class="reservations-card-list" id="userRequestsList">
+            <!-- Populated by user-portal.js -->
+          </div>
+
+          <div class="user-empty-state" id="userRequestsEmpty" style="padding: 24px;">
+            <div class="empty-icon" style="font-size: 1.6rem;">📋</div>
+            <h4 style="margin: 0 0 4px 0; font-size: 0.95rem; color: var(--roomq-blue-strong);">No active reservation requests</h4>
+            <p style="font-size: 0.76rem; margin: 0;">You haven't submitted any room requests yet. Use the "Request Room" button to reserve a space.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="roomq-toast-container" id="roomqToastContainer" aria-live="polite"></div>
+
+    <!-- Room Reservation Request Modal -->
+    <div class="roomq-modal-overlay" id="reservationModal" role="dialog" aria-modal="true" aria-labelledby="resModalTitle">
+      <div class="roomq-modal">
+        <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
+
+        <div class="modal-head">
+          <p class="panel-kicker">Room Booking</p>
+          <h2 id="resModalTitle">Request Room Reservation</h2>
+          <p>Submit a request to use an available classroom. Conflicts will be verified automatically.</p>
+        </div>
+
+        <div class="modal-alert" id="modalAlert" role="alert"></div>
+
+        <form class="modal-form" id="reservationForm">
+          <div class="modal-form-grid">
+            <label class="modal-field">
+              <span>Building</span>
+              <select id="resBuilding" required>
+                <option value="">Select building</option>
+              </select>
+            </label>
+
+            <label class="modal-field">
+              <span>Floor</span>
+              <select id="resFloor" required disabled>
+                <option value="">Select floor</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="modal-field">
+            <span>Room</span>
+            <select id="resRoom" required disabled>
+              <option value="">Select room</option>
+            </select>
+          </label>
+
+          <div class="modal-form-grid">
+            <label class="modal-field">
+              <span>Date</span>
+              <input type="date" id="resDate" required />
+            </label>
+
+            <label class="modal-field">
+              <span>Purpose / Activity</span>
+              <input type="text" id="resPurpose" placeholder="e.g. Study Group, Project Defense, Org Meeting" required />
+            </label>
+          </div>
+
+          <div class="modal-form-grid">
+            <label class="modal-field">
+              <span>Start Time</span>
+              <input type="time" id="resStartTime" required />
+            </label>
+
+            <label class="modal-field">
+              <span>End Time</span>
+              <input type="time" id="resEndTime" required />
+            </label>
+          </div>
+
+          <div class="modal-form-grid">
+            <label class="modal-field">
+              <span>Requester Name</span>
+              <input type="text" id="resRequester" value="Sofia Ramirez" required />
+            </label>
+
+            <label class="modal-field">
+              <span>Student / Faculty ID</span>
+              <input type="text" id="resIdNumber" value="2023-10842" required />
+            </label>
+          </div>
+
+          <button type="submit" class="modal-submit-btn">Submit Reservation Request</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Quick Schedule Lookup Modal -->
+    <div class="roomq-modal-overlay" id="scheduleModal" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle">
+      <div class="roomq-modal">
+        <button type="button" class="modal-close-btn" id="scheduleModalClose" aria-label="Close schedule modal">✕</button>
+
+        <div class="modal-head">
+          <p class="panel-kicker">Room Timetable</p>
+          <h2 id="scheduleModalTitle">Room Schedule</h2>
+        </div>
+
+        <div id="scheduleModalContent">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="roomq-time.js"></script>
+    <script src="classroom-explorer.js"></script>
+    <script src="user-portal.js"></script>
+  </body>
+</html>

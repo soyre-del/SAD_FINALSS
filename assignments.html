@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="user-style.css" />
   </head>
   <body>
     <div class="app-shell assignment-shell">
@@ -23,10 +24,9 @@
         <nav class="sidebar-nav" aria-label="Main navigation">
           <a href="index.html" class="nav-item"><span class="nav-icon">◫</span>Dashboard</a>
           <a href="classrooms.html" class="nav-item"><span class="nav-icon">▣</span>Classrooms</a>
-          <a href="#" class="nav-item"><span class="nav-icon">▤</span>Schedules</a>
+          <a href="user-schedules.html" class="nav-item"><span class="nav-icon">▤</span>Schedules</a>
           <a href="assignments.html" class="nav-item active" aria-current="page"><span class="nav-icon">◍</span>Assignments</a>
-          <a href="#" class="nav-item"><span class="nav-icon">◌</span>Availability</a>
-          <a href="#" class="nav-item"><span class="nav-icon">⚑</span>Conflicts</a>
+          <a href="user.html" class="nav-item" style="margin-top: 14px; border: 1px dashed rgba(255,255,255,0.25);"><span class="nav-icon">🎓</span>User Portal</a>
         </nav>
 
         <div class="profile-box">
@@ -44,7 +44,13 @@
             <p class="eyebrow">NORSU-MC 1 <span id="todayDate"></span></p>
             <h1>Room Assignments</h1>
           </div>
-          <a class="assignment-back-link" href="classrooms.html">View classroom availability <span>→</span></a>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <a href="user.html" class="role-switch-btn" title="Switch to Student &amp; Faculty View">
+              <span class="role-icon">🎓</span>
+              <span>User Portal</span>
+            </a>
+            <a class="assignment-back-link" href="classrooms.html">View classroom availability <span>→</span></a>
+          </div>
         </header>
 
         <section class="assignment-intro" aria-labelledby="assignmentIntroHeading">
