@@ -75,10 +75,10 @@
           <div class="campus-hero-copy">
             <p class="campus-kicker"><span></span> NORSU · Main Campus 1</p>
             <h2 id="campus-hero-title">A brighter view of your campus classrooms.</h2>
-            <p class="campus-description">Find learning spaces across campus and see classroom availability at a glance.</p>
+            <p class="campus-description">Central operations for Negros Oriental State University classroom scheduling, interactive floor layouts, and student room reservations.</p>
             <div class="campus-actions">
-              <a class="campus-button primary" href="#availability-overview">Check availability <span>→</span></a>
-              <a class="campus-button secondary" href="#campus-map">Explore campus map</a>
+              <a class="campus-button primary" href="classrooms.html">Open Classroom Explorer <span>→</span></a>
+              <a class="campus-button secondary" href="assignments.html">Manage assignments &amp; requests <span>→</span></a>
             </div>
             <div class="campus-note"><span class="campus-dot"></span> One campus. Every classroom, in view.</div>
           </div>
@@ -92,65 +92,161 @@
         <section class="dashboard-stats" aria-label="Classroom summary">
           <article class="summary-card summary-primary">
             <div class="summary-icon">▣</div>
-            <div><p>Total Classrooms</p><strong>48</strong></div>
+            <div>
+              <p>Total Classrooms</p>
+              <strong id="adminStatTotal">97</strong>
+            </div>
             <span class="summary-accent"></span>
           </article>
           <article class="summary-card">
-            <div class="summary-icon accent">◍</div>
-            <div><p>Available Now</p><strong>22</strong></div>
-            <span class="summary-accent"></span>
+            <div class="summary-icon" style="background: rgba(16, 185, 129, 0.15); color: #059669;">✓</div>
+            <div>
+              <p>Available Now</p>
+              <strong id="adminStatAvailable">—</strong>
+            </div>
+            <span class="summary-accent" style="background: #10b981;"></span>
           </article>
           <article class="summary-card">
             <div class="summary-icon navy">◐</div>
-            <div><p>Occupied</p><strong>26</strong></div>
+            <div>
+              <p>In Session / Occupied</p>
+              <strong id="adminStatOccupied">—</strong>
+            </div>
             <span class="summary-accent"></span>
           </article>
           <article class="summary-card">
             <div class="summary-icon sky">▤</div>
-            <div><p>Room Assignments</p><strong>126</strong></div>
+            <div>
+              <p>Room Assignments</p>
+              <strong id="adminStatAssignments">0</strong>
+            </div>
             <span class="summary-accent"></span>
           </article>
         </section>
 
-        <section class="panel availability-section" id="availability-overview" aria-labelledby="availability-heading">
-          <div class="availability-heading">
-            <div>
-              <p class="panel-kicker">Room availability</p>
-              <h2 id="availability-heading">Classrooms across campus</h2>
+        <!-- Administrative Operations Hub -->
+        <section class="portal-hub-grid" aria-label="Administrative Portals">
+          <article class="portal-hub-card">
+            <div class="hub-card-icon" style="background: rgba(25, 81, 252, 0.12); color: var(--roomq-blue);">▣</div>
+            <div class="hub-card-body">
+              <p class="panel-kicker">Interactive Workspace</p>
+              <h3>Classroom Explorer</h3>
+              <p class="hub-card-desc">
+                Access mapped floor layouts, room coordinate bounds, zoom controls, and upcoming daily timetables across all 7 campus buildings.
+              </p>
             </div>
-            <span class="availability-legend"><i></i> Status overview</span>
-          </div>
+            <a href="classrooms.html" class="campus-button primary hub-action-btn">
+              <span>Open Classroom Explorer</span> <span>➔</span>
+            </a>
+          </article>
 
-          <div class="room-cards">
-            <article class="room-card room-available">
-              <div class="room-card-top"><span class="room-symbol">A</span><span class="room-status">Available</span></div>
-              <h3>Room 101</h3>
-              <p>Building A <span>·</span> 2nd Floor</p>
-              <small>Next open slot <strong>9:00 AM–12:00 PM</strong></small>
-            </article>
-            <article class="room-card room-occupied">
-              <div class="room-card-top"><span class="room-symbol">B</span><span class="room-status">Occupied</span></div>
-              <h3>Room 205</h3>
-              <p>Building B <span>·</span> 2nd Floor</p>
-              <small>Class in session <strong>8:00 AM–11:30 AM</strong></small>
-            </article>
-            <article class="room-card room-reserved">
-              <div class="room-card-top"><span class="room-symbol">C</span><span class="room-status">Reserved</span></div>
-              <h3>Room 315</h3>
-              <p>Building C <span>·</span> 3rd Floor</p>
-              <small>Reserved slot <strong>10:30 AM–1:00 PM</strong></small>
-            </article>
-            <article class="room-card room-available">
-              <div class="room-card-top"><span class="room-symbol">D</span><span class="room-status">Available</span></div>
-              <h3>Room 402</h3>
-              <p>Building D <span>·</span> 4th Floor</p>
-              <small>Next open slot <strong>1:00 PM–4:00 PM</strong></small>
-            </article>
-          </div>
+          <article class="portal-hub-card">
+            <div class="hub-card-icon" style="background: rgba(16, 185, 129, 0.14); color: #059669;">◍</div>
+            <div class="hub-card-body">
+              <p class="panel-kicker">Scheduling Management</p>
+              <h3>Room Assignments</h3>
+              <p class="hub-card-desc">
+                Schedule room use for specific dates and time windows. Prevents double-booking and instantly synchronizes with student availability views.
+              </p>
+            </div>
+            <a href="assignments.html" class="campus-button secondary hub-action-btn" style="background: rgba(25, 81, 252, 0.08); color: var(--roomq-blue); border-color: rgba(25, 81, 252, 0.2);">
+              <span>Manage Assignments</span> <span>➔</span>
+            </a>
+          </article>
+
+          <article class="portal-hub-card">
+            <div class="hub-card-icon" style="background: rgba(245, 158, 11, 0.14); color: #b45309;">✉</div>
+            <div class="hub-card-body">
+              <p class="panel-kicker">Pending Reviews</p>
+              <h3>Reservation Requests <span id="adminPendingBadge" class="request-pending-badge" style="display: none;">0</span></h3>
+              <p class="hub-card-desc">
+                Review classroom booking requests from students and faculty. Approve to convert them into confirmed assignments, or reject them.
+              </p>
+            </div>
+            <a href="assignments.html#reservation-requests" class="campus-button secondary hub-action-btn" style="background: rgba(245, 158, 11, 0.09); color: #b45309; border-color: rgba(245, 158, 11, 0.28);">
+              <span>Review Requests</span> <span>➔</span>
+            </a>
+          </article>
         </section>
       </main>
     </div>
 
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/classroom-explorer.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        function updateAdminStats() {
+          const buildings = window.RoomQ && window.RoomQ.buildings;
+          let totalRooms = 0;
+          const allRoomsList = [];
+          if (Array.isArray(buildings)) {
+            buildings.forEach((b) => {
+              if (Array.isArray(b.floors)) {
+                b.floors.forEach((f) => {
+                  if (Array.isArray(f.regions)) {
+                    f.regions.forEach((r) => {
+                      totalRooms++;
+                      allRoomsList.push({ buildingId: b.id, floorId: f.id, regionId: r.id });
+                    });
+                  }
+                });
+              }
+            });
+          }
+
+          let records = [];
+          try {
+            const raw = localStorage.getItem('roomq.roomUsage.v1');
+            records = raw ? JSON.parse(raw) : [];
+            if (!Array.isArray(records)) records = [];
+          } catch (e) { records = []; }
+
+          let requests = [];
+          try {
+            const rawReq = localStorage.getItem('roomq.roomRequests.v1');
+            requests = rawReq ? JSON.parse(rawReq) : [];
+            if (!Array.isArray(requests)) requests = [];
+          } catch (e) { requests = []; }
+
+          const pendingCount = requests.filter(r => (r.status || 'Pending Review') === 'Pending Review').length;
+          const pendingBadge = document.getElementById('adminPendingBadge');
+          if (pendingBadge) {
+            pendingBadge.textContent = String(pendingCount);
+            pendingBadge.style.display = pendingCount > 0 ? 'inline-flex' : 'none';
+          }
+
+          const now = new Date();
+          const curDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+          const curTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+          let occupiedCount = 0;
+          allRoomsList.forEach((rm) => {
+            const isInUse = records.some((rec) =>
+              rec.buildingId === rm.buildingId &&
+              rec.floorId === rm.floorId &&
+              rec.regionId === rm.regionId &&
+              rec.date === curDate &&
+              rec.startTime <= curTime &&
+              rec.endTime > curTime
+            );
+            if (isInUse) occupiedCount++;
+          });
+
+          const totalEl = document.getElementById('adminStatTotal');
+          const availEl = document.getElementById('adminStatAvailable');
+          const occEl = document.getElementById('adminStatOccupied');
+          const assignEl = document.getElementById('adminStatAssignments');
+
+          if (totalEl) totalEl.textContent = String(totalRooms || 97);
+          if (availEl) availEl.textContent = String(Math.max(0, (totalRooms || 97) - occupiedCount));
+          if (occEl) occEl.textContent = String(occupiedCount);
+          if (assignEl) assignEl.textContent = String(records.length);
+        }
+
+        updateAdminStats();
+        window.addEventListener('storage', updateAdminStats);
+        setInterval(updateAdminStats, 30000);
+      });
+    </script>
   </body>
 </html>

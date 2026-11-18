@@ -650,12 +650,14 @@
 
 .ticket-room-info strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
+  font-weight: 800;
   color: var(--roomq-blue-strong);
 }
 
 .ticket-room-info span {
-  font-size: 0.76rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
   color: var(--roomq-muted);
 }
 
@@ -666,9 +668,9 @@
 }
 
 .ticket-status-pill {
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 800;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   background: rgba(245, 158, 11, 0.12);
   color: #b45309;
@@ -688,10 +690,10 @@
 }
 
 .btn-ticket-cancel {
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 10px;
-  font-size: 0.74rem;
-  font-weight: 700;
+  font-size: 0.86rem;
+  font-weight: 750;
   color: #d55a52;
   background: rgba(213, 90, 82, 0.08);
   border: 1px solid rgba(213, 90, 82, 0.2);
@@ -720,17 +722,17 @@
   pointer-events: auto;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: #ffffff;
   border-radius: 14px;
-  padding: 12px 18px;
+  padding: 14px 20px;
   box-shadow: 0 10px 30px rgba(7, 23, 46, 0.2);
   border: 1px solid rgba(13, 38, 63, 0.08);
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 650;
   color: var(--roomq-ink);
   animation: slideInToast 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  max-width: 380px;
+  max-width: 420px;
 }
 
 .roomq-toast.success {
@@ -769,14 +771,14 @@
 
 .roomq-modal {
   position: relative;
-  width: min(580px, 100%);
+  width: min(600px, 100%);
   max-height: 90vh;
   overflow-y: auto;
   background: #ffffff;
   border-radius: 24px;
   box-shadow: 0 25px 60px rgba(7, 23, 46, 0.35);
   border: 1px solid rgba(25, 81, 252, 0.18);
-  padding: 28px;
+  padding: 32px;
   transform: translateY(16px) scale(0.96);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -785,19 +787,33 @@
   transform: translateY(0) scale(1);
 }
 
+.modal-head h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--roomq-blue-strong);
+  margin: 4px 0 6px;
+}
+
+.modal-head p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--roomq-muted);
+  margin: 0;
+}
+
 .modal-close-btn {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid rgba(13, 38, 63, 0.12);
   background: rgba(13, 38, 63, 0.04);
   color: var(--roomq-ink);
   display: grid;
   place-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.18s ease;
 }
@@ -812,36 +828,37 @@
 .modal-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 14px;
+  gap: 16px;
+  margin-top: 18px;
 }
 
 .modal-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
 }
 
 .modal-field {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .modal-field span {
-  font-size: 0.74rem;
-  font-weight: 700;
+  font-size: 0.88rem;
+  font-weight: 750;
   color: var(--roomq-ink);
 }
 
 .modal-field input,
 .modal-field select {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 12px;
   border: 1px solid rgba(13, 38, 63, 0.15);
   background: #f8fbff;
-  font-size: 0.84rem;
+  font-size: 0.95rem;
   color: var(--roomq-ink);
   transition: all 0.2s ease;
 }
@@ -855,12 +872,12 @@
 }
 
 .modal-alert {
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  line-height: 1.45;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 0.92rem;
+  line-height: 1.5;
   display: none;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .modal-alert.show {
@@ -880,13 +897,13 @@
 }
 
 .modal-submit-btn {
-  padding: 13px 20px;
+  padding: 14px 22px;
   border-radius: 14px;
   background: linear-gradient(135deg, var(--roomq-blue) 0%, var(--roomq-navy) 100%);
   color: #ffffff;
   border: none;
-  font-size: 0.88rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 750;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 6px 18px rgba(25, 81, 252, 0.28);
@@ -910,22 +927,24 @@
 .user-schedule-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
+  font-size: 0.92rem;
 }
 
 .user-schedule-table th {
   background: rgba(25, 81, 252, 0.06);
-  padding: 12px 16px;
+  padding: 14px 18px;
   text-align: left;
   font-weight: 800;
+  font-size: 0.92rem;
   color: var(--roomq-blue-strong);
   border-bottom: 1px solid rgba(13, 38, 63, 0.08);
 }
 
 .user-schedule-table td {
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-bottom: 1px solid rgba(13, 38, 63, 0.05);
   color: var(--roomq-ink);
+  font-size: 0.92rem;
 }
 
 .user-schedule-table tr:hover td {
@@ -934,10 +953,10 @@
 
 .time-slot-tag {
   display: inline-block;
-  padding: 4px 9px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 0.74rem;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-weight: 750;
+  font-size: 0.85rem;
   background: rgba(25, 81, 252, 0.08);
   color: var(--roomq-blue);
 }

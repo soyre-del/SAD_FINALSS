@@ -26,7 +26,6 @@
           <a href="index.html" class="nav-item active" aria-current="page"><span class="nav-icon">◫</span>Dashboard</a>
           <a href="classrooms.html" class="nav-item"><span class="nav-icon">▣</span>Classroom Explorer</a>
           <a href="schedules.html" class="nav-item"><span class="nav-icon">▤</span>Room Schedules</a>
-          <a href="#quick-finder" class="nav-item"><span class="nav-icon">◌</span>Find Free Room</a>
           <a href="#my-requests" class="nav-item"><span class="nav-icon">◍</span>My Reservations</a>
           <a href="../admin/index.html" class="nav-item" style="margin-top: 18px; border: 1px dashed rgba(255,255,255,0.22);"><span class="nav-icon">🔒</span>Admin View</a>
         </nav>
@@ -79,8 +78,8 @@
               Find empty classrooms right now across campus. View real-time availability, check schedules, or request a room reservation.
             </p>
             <div class="campus-actions">
-              <a class="campus-button primary" href="#quick-finder">Find free rooms now <span>↓</span></a>
-              <a class="campus-button secondary" href="classrooms.html">Explore floor layout <span>→</span></a>
+              <a class="campus-button primary" href="classrooms.html">Explore classrooms <span>→</span></a>
+              <a class="campus-button secondary" href="schedules.html">View schedules <span>→</span></a>
               <button type="button" class="campus-button secondary" onclick="window.openRoomReservationModal()">＋ Request room</button>
             </div>
             <div class="campus-note"><span class="campus-dot" style="background: #10b981;"></span> Real-time status synced with Academic Scheduling.</div>
@@ -214,84 +213,49 @@
           </article>
         </section>
 
-        <!-- Quick Classroom Finder Section -->
-        <section class="finder-panel" id="quick-finder" aria-labelledby="finder-heading">
-          <div class="finder-header-row">
-            <div>
-              <p class="panel-kicker">Live Classroom Finder</p>
-              <h2 id="finder-heading">Search &amp; Filter Learning Spaces</h2>
+        <!-- Learning Hub & Quick Portals -->
+        <section class="portal-hub-grid" aria-label="Quick Access Portals">
+          <article class="portal-hub-card">
+            <div class="hub-card-icon" style="background: rgba(25, 81, 252, 0.12); color: var(--roomq-blue);">▣</div>
+            <div class="hub-card-body">
+              <p class="panel-kicker">Interactive Floor Plan</p>
+              <h3>Classroom Explorer</h3>
+              <p class="hub-card-desc">
+                Navigate campus buildings and floors with an interactive visual map. Inspect live room availability, projector/aircon facilities, and seating capacity.
+              </p>
             </div>
-            <button type="button" class="campus-button primary" onclick="window.openRoomReservationModal()">
-              <span>＋</span> Request Room Booking
+            <a href="classrooms.html" class="campus-button primary hub-action-btn">
+              <span>Open Classroom Explorer</span> <span>➔</span>
+            </a>
+          </article>
+
+          <article class="portal-hub-card">
+            <div class="hub-card-icon" style="background: rgba(16, 185, 129, 0.14); color: #059669;">▤</div>
+            <div class="hub-card-body">
+              <p class="panel-kicker">Timetables &amp; Open Gaps</p>
+              <h3>Room Schedules Matrix</h3>
+              <p class="hub-card-desc">
+                Browse day-by-day class timetables by building and floor. Quickly identify vacant intervals and study slots between scheduled lectures.
+              </p>
+            </div>
+            <a href="schedules.html" class="campus-button secondary hub-action-btn" style="background: rgba(25, 81, 252, 0.08); color: var(--roomq-blue); border-color: rgba(25, 81, 252, 0.2);">
+              <span>View Room Schedules</span> <span>➔</span>
+            </a>
+          </article>
+
+          <article class="portal-hub-card">
+            <div class="hub-card-icon" style="background: rgba(245, 158, 11, 0.14); color: #b45309;">◍</div>
+            <div class="hub-card-body">
+              <p class="panel-kicker">Reserve a Space</p>
+              <h3>Room Booking Request</h3>
+              <p class="hub-card-desc">
+                Need an empty classroom for study groups, makeup classes, or org meetings? Submit a booking with automated schedule conflict detection.
+              </p>
+            </div>
+            <button type="button" class="campus-button secondary hub-action-btn" onclick="window.openRoomReservationModal()" style="background: rgba(16, 185, 129, 0.09); color: #047857; border-color: rgba(16, 185, 129, 0.28);">
+              <span>＋ Request Room Booking</span> <span>➔</span>
             </button>
-          </div>
-
-          <!-- Finder Toolbar -->
-          <div class="finder-toolbar">
-            <div class="search-and-sort-row">
-              <div class="user-search-input-wrap">
-                <span class="user-search-icon">⌕</span>
-                <input type="text" id="userSearchInput" placeholder="Search by room name, number, building, or lab (e.g. 307, Speech Lab, Skylab, CAS)..." />
-                <button type="button" class="search-clear-btn" id="searchClearBtn" aria-label="Clear search">✕</button>
-              </div>
-
-              <div class="sort-select-wrap">
-                <select id="userSortSelect" aria-label="Sort classrooms">
-                  <option value="default">Sort: Default</option>
-                  <option value="status">Sort: Available First 🟢</option>
-                  <option value="room-asc">Sort: Room Name / No.</option>
-                  <option value="capacity-desc">Sort: Capacity (High to Low)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Building Filter Pills -->
-            <div class="filter-pills-bar">
-              <span class="filter-group-label">Building:</span>
-              <button type="button" class="user-pill-btn active" data-building="all">All <span class="pill-count">97</span></button>
-              <button type="button" class="user-pill-btn" data-building="cas">CAS <span class="pill-count">15</span></button>
-              <button type="button" class="user-pill-btn" data-building="cba">CBA <span class="pill-count">12</span></button>
-              <button type="button" class="user-pill-btn" data-building="cthm">CTHM <span class="pill-count">13</span></button>
-              <button type="button" class="user-pill-btn" data-building="cnpahs">CNPAHS <span class="pill-count">13</span></button>
-              <button type="button" class="user-pill-btn" data-building="cit">CIT <span class="pill-count">24</span></button>
-              <button type="button" class="user-pill-btn" data-building="st">ST <span class="pill-count">15</span></button>
-              <button type="button" class="user-pill-btn" data-building="cted">CTED <span class="pill-count">5</span></button>
-            </div>
-
-            <!-- Status & Type Filter Pills -->
-            <div class="filter-pills-bar">
-              <span class="filter-group-label">Status:</span>
-              <button type="button" class="user-pill-btn active" data-status="all">All Rooms <span class="pill-count">97</span></button>
-              <button type="button" class="user-pill-btn status-available" data-status="available">Available Now 🟢 <span class="pill-count">—</span></button>
-              <button type="button" class="user-pill-btn status-occupied" data-status="occupied">Occupied 🔴 <span class="pill-count">—</span></button>
-
-              <span class="filter-group-label" style="margin-left: 10px;">Type:</span>
-              <button type="button" class="user-pill-btn active" data-type="all">All Spaces</button>
-              <button type="button" class="user-pill-btn" data-type="lecture">Lecture Rooms</button>
-              <button type="button" class="user-pill-btn" data-type="lab">Laboratories</button>
-            </div>
-          </div>
-
-          <!-- Results Summary Header -->
-          <div class="results-summary-bar">
-            <h3>
-              <span>Classroom Directory</span>
-              <span class="results-tag" id="resultsCount">Loading classrooms...</span>
-            </h3>
-            <span style="font-size: 0.74rem; color: var(--roomq-muted);">Live status updates automatically</span>
-          </div>
-
-          <!-- Room Cards Grid -->
-          <div class="user-room-grid" id="userRoomGrid" aria-live="polite">
-            <!-- Dynamically populated by user-portal.js -->
-          </div>
-
-          <!-- Empty State -->
-          <div class="user-empty-state" id="userEmptyState" hidden>
-            <div class="empty-icon">🔍</div>
-            <h3 style="margin: 0 0 4px 0; color: var(--roomq-blue-strong);">No matching classrooms found</h3>
-            <p style="margin: 0;">Try adjusting your search query, building filter, or status selection.</p>
-          </div>
+          </article>
         </section>
 
         <!-- My Reservations Panel -->

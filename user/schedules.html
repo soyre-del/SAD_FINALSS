@@ -26,7 +26,6 @@
           <a href="index.html" class="nav-item"><span class="nav-icon">◫</span>Dashboard</a>
           <a href="classrooms.html" class="nav-item"><span class="nav-icon">▣</span>Classroom Explorer</a>
           <a href="schedules.html" class="nav-item active" aria-current="page"><span class="nav-icon">▤</span>Room Schedules</a>
-          <a href="index.html#quick-finder" class="nav-item"><span class="nav-icon">◌</span>Find Free Room</a>
           <a href="index.html#my-requests" class="nav-item"><span class="nav-icon">◍</span>My Reservations</a>
           <a href="../admin/index.html" class="nav-item" style="margin-top: 18px; border: 1px dashed rgba(255,255,255,0.22);"><span class="nav-icon">🔒</span>Admin View</a>
         </nav>
@@ -64,33 +63,33 @@
 
         <!-- Filter Controls -->
         <section class="finder-panel">
-          <div class="finder-header-row" style="margin-bottom: 12px;">
+          <div class="finder-header-row" style="margin-bottom: 14px;">
             <div>
               <p class="panel-kicker">Schedule Directory</p>
-              <h2 style="margin: 0; font-size: 1.3rem; color: var(--roomq-blue-strong);">Inspect Daily Class Timetables</h2>
+              <h2 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: var(--roomq-blue-strong);">Inspect Daily Class Timetables</h2>
             </div>
-            <span style="font-size: 0.78rem; color: var(--roomq-muted);">Check booked class hours and find open study windows</span>
+            <span style="font-size: 0.9rem; color: var(--roomq-muted);">Check booked class hours and find open study windows</span>
           </div>
 
-          <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; align-items: flex-end;">
-            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 0.75rem; font-weight: 700; color: var(--roomq-ink);">
+          <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; align-items: flex-end;">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; font-weight: 750; color: var(--roomq-ink);">
               <span>Building</span>
-              <select id="schedBuildingSelect" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.15); font-size: 0.84rem; background: #fff;">
+              <select id="schedBuildingSelect" style="padding: 11px 16px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.18); font-size: 0.95rem; font-weight: 600; background: #fff; min-width: 180px;">
               </select>
             </label>
 
-            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 0.75rem; font-weight: 700; color: var(--roomq-ink);">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; font-weight: 750; color: var(--roomq-ink);">
               <span>Floor</span>
-              <select id="schedFloorSelect" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.15); font-size: 0.84rem; background: #fff;">
+              <select id="schedFloorSelect" style="padding: 11px 16px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.18); font-size: 0.95rem; font-weight: 600; background: #fff; min-width: 160px;">
               </select>
             </label>
 
-            <label style="display: flex; flex-direction: column; gap: 5px; font-size: 0.75rem; font-weight: 700; color: var(--roomq-ink);">
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 0.88rem; font-weight: 750; color: var(--roomq-ink);">
               <span>Date</span>
-              <input type="date" id="schedDateInput" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.15); font-size: 0.84rem; background: #fff;" />
+              <input type="date" id="schedDateInput" style="padding: 11px 16px; border-radius: 12px; border: 1px solid rgba(13,38,63,0.18); font-size: 0.95rem; font-weight: 600; background: #fff;" />
             </label>
 
-            <button type="button" class="campus-button primary" id="schedRefreshBtn" style="padding: 10px 18px; border-radius: 12px;">
+            <button type="button" class="campus-button primary" id="schedRefreshBtn" style="padding: 12px 22px; border-radius: 12px; font-size: 0.92rem; font-weight: 750;">
               Refresh Schedule
             </button>
           </div>
@@ -101,11 +100,11 @@
           <div class="reservations-header">
             <div>
               <p class="panel-kicker">Matrix View</p>
-              <h2 id="schedTableHeading" style="margin: 0; font-size: 1.25rem; color: var(--roomq-blue-strong);">Classroom Schedule Matrix</h2>
+              <h2 id="schedTableHeading" style="margin: 0; font-size: 1.35rem; font-weight: 800; color: var(--roomq-blue-strong);">Classroom Schedule Matrix</h2>
             </div>
-            <div style="display: flex; gap: 12px; font-size: 0.74rem;">
-              <span style="display: flex; align-items: center; gap: 6px;"><i style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; display: inline-block;"></i> Available for Study</span>
-              <span style="display: flex; align-items: center; gap: 6px;"><i style="width: 8px; height: 8px; border-radius: 50%; background: #64748b; display: inline-block;"></i> Class In Session</span>
+            <div style="display: flex; gap: 16px; font-size: 0.86rem; font-weight: 650;">
+              <span style="display: flex; align-items: center; gap: 7px;"><i style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></i> Available for Study</span>
+              <span style="display: flex; align-items: center; gap: 7px;"><i style="width: 10px; height: 10px; border-radius: 50%; background: #64748b; display: inline-block;"></i> Class In Session</span>
             </div>
           </div>
 

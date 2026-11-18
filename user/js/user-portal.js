@@ -414,16 +414,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Campus map interactive building click
+    // Campus map interactive building click - open directly in Classroom Explorer
     document.querySelectorAll('[data-map-bldg]').forEach((el) => {
       el.addEventListener('click', () => {
         const bldg = el.dataset.mapBldg;
-        const matchingPill = document.querySelector(`.user-pill-btn[data-building="${bldg}"]`);
-        if (matchingPill) {
-          matchingPill.click();
-          const finder = document.getElementById('quick-finder');
-          if (finder) finder.scrollIntoView({ behavior: 'smooth' });
-        }
+        window.location.href = `classrooms.html?building=${encodeURIComponent(bldg)}`;
       });
     });
   }

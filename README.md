@@ -8,17 +8,16 @@ A modern, responsive classroom management and availability platform designed for
 
 ### 1. 🎓 Student & Faculty User Side (`user/index.html`, `user/classrooms.html`, `user/schedules.html`)
 Designed for students and instructors who need quick, seamless access to classroom availability and study spaces:
-- **Live Classroom Finder**: Search classrooms in real time by building (CAS, CBA, CTHM, CNPAHS, CIT, ST, CTED), floor, room code/name, or room type (Lecture Room vs Computer/Specialized Lab).
-- **Real-Time Availability Indicators**: Instantly see whether a room is currently available or occupied in session, with countdowns to the next open slot.
-- **Interactive Floor Plan Navigator (`user/classrooms.html`)**: Visually explore mapped classroom positions, zoom and pan across floors, check room facilities (capacity, projectors, aircon, WiFi), and inspect upcoming daily schedules.
+- **Operations & Portals Dashboard (`user/index.html`)**: Real-time campus learning hub with direct one-click portals to Classroom Explorer, Schedules Matrix, and Room Booking Requests, alongside real-time metrics and a personal booking tracker.
+- **Interactive Floor Plan Navigator (`user/classrooms.html`)**: Visually explore mapped classroom positions across campus buildings (CAS, CBA, CTHM, CNPAHS, CIT, ST, CTED), zoom and pan across floors, check room facilities (capacity, projectors, aircon, WiFi), and inspect upcoming daily schedules.
+- **Room Schedules Matrix (`user/schedules.html`)**: Inspect daily timetables by building, floor, and date to spot open study gaps between classes.
 - **Room Reservation Requests**: Submit room booking requests for study groups, thesis defense, makeup classes, or student organization activities with automated schedule conflict detection.
 - **My Reservations Tracker**: View submitted room booking requests with live review statuses (`Pending Review`, `Confirmed`, `Rejected`) and cancellation options. Cancelling a confirmed booking frees the room again.
-- **Room Schedules Matrix (`user/schedules.html`)**: Inspect daily timetables by building, floor, and date to spot open study gaps between classes.
-- **Instant Role Switcher**: Switch to the Admin portal at any time via the prominent `🔑 Admin Portal` button.
+- **Instant Role Switcher**: Switch to the Admin portal at any time via the prominent role switch pill.
 
 ### 2. 🔒 Academic Staff / Admin Side (`admin/index.html`, `admin/classrooms.html`, `admin/assignments.html`)
 Designed for university scheduling staff and campus administrators:
-- **Operations Dashboard (`admin/index.html`)**: Overview of classroom availability and room assignments.
+- **Operations Dashboard (`admin/index.html`)**: Central overview with real-time operational statistics (total rooms, available, occupied, and active assignments) and fast management shortcuts.
 - **Classroom Explorer (`admin/classrooms.html`)**: Administrative floor-plan workspace with interactive room coordinate mapping and schedule details.
 - **Room Assignments Manager (`admin/assignments.html`)**: Assign classrooms for specific dates and time windows (with automatic storage in `localStorage`), update room availability, and remove past assignments.
 - **Reservation Requests Review (`admin/assignments.html`)**: See every booking request submitted from the User portal. **Approve** turns the request into a room assignment (blocked if it overlaps an existing one) and marks it `Confirmed`; **Reject** marks it `Rejected`. The requester's *My Reservations* list updates live.
