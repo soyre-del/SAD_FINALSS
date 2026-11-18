@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classroom Explorer | RoomQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="css/admin-style.css" />
+  </head>
+  <body>
+    <div class="app-shell explorer-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">RQ</div>
+          <div class="brand-copy">
+            <strong>RoomQ</strong>
+            <span>Admin</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="index.html" class="nav-item"><span class="nav-icon">◫</span>Dashboard</a>
+          <a href="classrooms.html" class="nav-item active" aria-current="page"><span class="nav-icon">▣</span>Classrooms</a>
+          <a href="../user/schedules.html" class="nav-item"><span class="nav-icon">▤</span>Schedules</a>
+          <a href="assignments.html" class="nav-item"><span class="nav-icon">◍</span>Assignments</a>
+          <a href="../user/classrooms.html" class="nav-item" style="margin-top: 14px; border: 1px dashed rgba(255,255,255,0.25);"><span class="nav-icon">🎓</span>User Explorer</a>
+        </nav>
+
+        <div class="profile-box">
+          <div class="mini-avatar">AS</div>
+          <div>
+            <strong>Academic Staff</strong>
+            <span>Scheduling</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content explorer-main">
+        <header class="topbar explorer-topbar">
+          <div>
+            <p class="eyebrow">NORSU-MC 1 <span id="todayDate"></span></p>
+            <h1>Classroom Explorer</h1>
+          </div>
+          <div class="topbar-actions">
+            <a href="../user/classrooms.html" class="role-switch-btn" title="Switch to Student &amp; Faculty View">
+              <span class="role-icon">🎓</span>
+              <span>User Explorer</span>
+            </a>
+            <span class="explorer-header-badge"><span></span> Floor plan workspace</span>
+          </div>
+        </header>
+
+        <section class="explorer-controls" aria-label="Building and availability controls">
+          <label class="explorer-field building-field">
+            <span>Building</span>
+            <select id="buildingSelector" aria-label="Select building"></select>
+          </label>
+
+          <label class="explorer-field floor-field">
+            <span>Floor</span>
+            <select id="floorSelector" aria-label="Select floor" disabled>
+              <option value="">Floor data unavailable</option>
+            </select>
+          </label>
+
+          <div class="explorer-field date-field">
+            <label for="availabilityDate">Check date</label>
+            <input id="availabilityDate" type="date" />
+          </div>
+
+          <div class="explorer-field time-field">
+            <span>Check time</span>
+            <div class="time-picker-controls" id="availabilityTimePicker">
+              <select data-time-hour aria-label="Hour"></select>
+              <span aria-hidden="true">:</span>
+              <select data-time-minute aria-label="Minute"></select>
+              <select data-time-period aria-label="AM or PM"></select>
+            </div>
+            <input id="availabilityTime" type="hidden" />
+          </div>
+
+          <p class="data-connection-note" id="availabilityNote" role="status">
+            Choose a date and time to check room availability.
+          </p>
+        </section>
+
+        <section class="availability-legend explorer-legend" aria-label="Availability legend">
+          <span class="legend-title">Availability for selected date and time</span>
+          <span><i class="legend-dot available"></i>Available</span>
+          <span><i class="legend-dot unavailable"></i>Not available</span>
+          <span><i class="legend-dot selected"></i>Selected room</span>
+        </section>
+
+        <div class="explorer-workspace">
+          <section class="panel floor-plan-panel" aria-labelledby="floorPlanHeading">
+            <div class="floor-plan-header">
+              <div>
+                <p class="panel-kicker">Existing classroom layout</p>
+                <h2 id="floorPlanHeading">CAS Building</h2>
+              </div>
+              <div class="floor-plan-tools" aria-label="Floor plan controls">
+                <button type="button" id="zoomOutButton" aria-label="Zoom out" disabled>−</button>
+                <span id="zoomLevel">100%</span>
+                <button type="button" id="zoomInButton" aria-label="Zoom in" disabled>+</button>
+                <button type="button" id="fitPlanButton" disabled>Fit</button>
+              </div>
+            </div>
+
+            <div class="floor-plan-canvas" id="floorPlanCanvas" aria-live="polite">
+              <div class="plan-stage" id="planStage" hidden>
+                <div class="plan-source-layer" id="planSourceLayer">
+                  <div class="room-overlay-layer" id="roomOverlayLayer"></div>
+                </div>
+              </div>
+
+              <div class="floor-plan-empty" id="floorPlanEmpty">
+                <div class="empty-plan-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none">
+                    <rect x="8" y="6" width="32" height="36" rx="5" stroke="currentColor" stroke-width="2" />
+                    <path d="M16 17h16M16 24h8M16 31h16" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+                  </svg>
+                </div>
+                <p class="empty-eyebrow">No layout loaded</p>
+                <h3 id="layoutEmptyTitle">CAS Building floor plan not found</h3>
+                <p class="empty-plan-copy" id="layoutEmptyCopy">
+                  Add the existing classroom layout to RoomQ to view the real room arrangement and enable accurate room selection.
+                </p>
+                <div class="layout-requirement">
+                  <span class="requirement-dot"></span>
+                  <span>Room positions will not be guessed or generated.</span>
+                </div>
+              </div>
+              <div class="canvas-caption" id="canvasCaption">
+                <span class="canvas-status-dot"></span>
+                Drag to pan · Use the controls to zoom
+              </div>
+            </div>
+            <div class="source-plan-key" aria-label="Original floor-plan key">
+              <span class="source-key-title">Plan key</span>
+              <span><i class="source-key-room"></i>Available room</span>
+              <span><i class="source-key-office"></i>Office / staff room</span>
+            </div>
+          </section>
+
+          <aside class="panel classroom-details-panel" aria-labelledby="detailsHeading">
+            <div class="details-panel-header">
+              <div>
+                <p class="panel-kicker">Classroom information</p>
+                <h2 id="detailsHeading">Room details</h2>
+              </div>
+              <span class="details-room-icon" aria-hidden="true">▣</span>
+            </div>
+
+            <div class="no-room-selected" id="roomSelectionState" role="status">
+              <span class="selection-indicator"></span>
+              <div>
+                <strong id="selectedRoomName">No classroom selected</strong>
+                <p id="roomSelectionDescription">Select a blue room region to inspect its mapped position.</p>
+              </div>
+            </div>
+
+            <dl class="room-detail-list">
+              <div><dt>Building</dt><dd id="detailsBuilding">CAS Building</dd></div>
+              <div><dt>Floor</dt><dd id="detailsFloor">Not connected</dd></div>
+              <div><dt>Plan category</dt><dd id="detailsCategory">—</dd></div>
+              <div><dt>Capacity</dt><dd id="detailsCapacity">—</dd></div>
+              <div><dt>Facilities</dt><dd id="detailsFacilities">—</dd></div>
+            </dl>
+
+            <div class="current-status-card">
+              <div>
+                <span class="detail-label">Current availability</span>
+                <strong id="detailsStatus">Awaiting room data</strong>
+              </div>
+              <span class="status-pending-dot" id="detailsStatusDot"></span>
+            </div>
+
+            <section class="schedule-preview" aria-labelledby="scheduleHeading">
+              <div class="schedule-preview-header">
+                <h3 id="scheduleHeading">Schedule</h3>
+                <button type="button" disabled>View full schedule</button>
+              </div>
+              <div class="schedule-empty" id="scheduleEmpty">
+                Select a room to view saved use times.
+              </div>
+            </section>
+
+          </aside>
+        </div>
+      </main>
+    </div>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/roomq-time.js"></script>
+    <script src="../assets/js/classroom-explorer.js"></script>
+  </body>
+</html>

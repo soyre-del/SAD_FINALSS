@@ -675,6 +675,18 @@
   border: 1px solid rgba(245, 158, 11, 0.28);
 }
 
+.ticket-status-pill.is-confirmed {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.ticket-status-pill.is-rejected {
+  background: rgba(213, 90, 82, 0.08);
+  color: #b4443d;
+  border-color: rgba(213, 90, 82, 0.25);
+}
+
 .btn-ticket-cancel {
   padding: 6px 12px;
   border-radius: 10px;

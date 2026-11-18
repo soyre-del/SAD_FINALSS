@@ -1,0 +1,96 @@
+/* ==========================================================================
+   RoomQ - Admin-specific styles (shared design system lives in assets/css/style.css)
+   ========================================================================== */
+
+/* Reservation Requests panel (admin/assignments.html) */
+#requestList {
+  display: grid;
+  max-height: 360px;
+  gap: 9px;
+  overflow: auto;
+}
+
+#requestFeedback:empty {
+  display: none;
+}
+
+#requestFeedback {
+  margin: 0 0 12px;
+}
+
+.request-pending-count {
+  background: rgba(245, 158, 11, 0.14);
+  color: #b45309;
+}
+
+.request-record {
+  flex-wrap: wrap;
+}
+
+.request-record[data-status="pending-review"] {
+  border-left: 3px solid #f59e0b;
+}
+
+.request-record[data-status="confirmed"],
+.request-record[data-status="rejected"] {
+  opacity: 0.78;
+}
+
+.request-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+}
+
+.request-approve,
+.request-reject {
+  padding: 7px 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.64rem;
+  font-weight: 700;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.request-approve {
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+}
+
+.request-approve:hover {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.request-reject {
+  border: 1px solid rgba(213, 90, 82, 0.22);
+  background: rgba(213, 90, 82, 0.08);
+  color: #d55a52;
+}
+
+.request-reject:hover {
+  background: #d55a52;
+  color: #ffffff;
+}
+
+.request-status-pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+.request-status-pill.is-confirmed {
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+}
+
+.request-status-pill.is-rejected {
+  border: 1px solid rgba(213, 90, 82, 0.25);
+  background: rgba(213, 90, 82, 0.08);
+  color: #b4443d;
+}

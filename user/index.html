@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="user-style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="css/user-style.css" />
   </head>
   <body>
     <div class="app-shell user-shell">
@@ -23,12 +23,12 @@
         </div>
 
         <nav class="sidebar-nav" aria-label="Student & Faculty navigation">
-          <a href="user.html" class="nav-item active"><span class="nav-icon">◫</span>Dashboard</a>
-          <a href="user-classrooms.html" class="nav-item"><span class="nav-icon">▣</span>Classroom Explorer</a>
-          <a href="user-schedules.html" class="nav-item"><span class="nav-icon">▤</span>Room Schedules</a>
+          <a href="index.html" class="nav-item active" aria-current="page"><span class="nav-icon">◫</span>Dashboard</a>
+          <a href="classrooms.html" class="nav-item"><span class="nav-icon">▣</span>Classroom Explorer</a>
+          <a href="schedules.html" class="nav-item"><span class="nav-icon">▤</span>Room Schedules</a>
           <a href="#quick-finder" class="nav-item"><span class="nav-icon">◌</span>Find Free Room</a>
           <a href="#my-requests" class="nav-item"><span class="nav-icon">◍</span>My Reservations</a>
-          <a href="index.html" class="nav-item" style="margin-top: 18px; border: 1px dashed rgba(255,255,255,0.22);"><span class="nav-icon">🔒</span>Admin View</a>
+          <a href="../admin/index.html" class="nav-item" style="margin-top: 18px; border: 1px dashed rgba(255,255,255,0.22);"><span class="nav-icon">🔒</span>Admin View</a>
         </nav>
 
         <div class="profile-box">
@@ -55,7 +55,7 @@
               Live: <strong id="userLiveTimeDisplay" style="margin-left: 2px;">--:--</strong>
             </span>
 
-            <a href="index.html" class="role-switch-pill" title="Go to Admin Management Portal">
+            <a href="../admin/index.html" class="role-switch-pill" title="Go to Admin Management Portal">
               <span class="role-badge">ADMIN</span>
               <span>Admin Portal ➔</span>
             </a>
@@ -80,7 +80,7 @@
             </p>
             <div class="campus-actions">
               <a class="campus-button primary" href="#quick-finder">Find free rooms now <span>↓</span></a>
-              <a class="campus-button secondary" href="user-classrooms.html">Explore floor layout <span>→</span></a>
+              <a class="campus-button secondary" href="classrooms.html">Explore floor layout <span>→</span></a>
               <button type="button" class="campus-button secondary" onclick="window.openRoomReservationModal()">＋ Request room</button>
             </div>
             <div class="campus-note"><span class="campus-dot" style="background: #10b981;"></span> Real-time status synced with Academic Scheduling.</div>
@@ -420,9 +420,9 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
-    <script src="roomq-time.js"></script>
-    <script src="classroom-explorer.js"></script>
-    <script src="user-portal.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/roomq-time.js"></script>
+    <script src="../assets/js/classroom-explorer.js"></script>
+    <script src="js/user-portal.js"></script>
   </body>
 </html>

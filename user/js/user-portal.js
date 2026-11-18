@@ -948,19 +948,37 @@ document.addEventListener('DOMContentLoaded', () => {
       const actions = document.createElement('div');
       actions.className = 'ticket-actions';
 
+      const status = req.status || 'Pending Review';
+      const statusIcons = { 'Pending Review': '⏳', Confirmed: '✅', Rejected: '✕' };
       const badge = document.createElement('span');
-      badge.className = 'ticket-status-pill';
-      badge.textContent = `⏳ ${req.status || 'Pending Review'}`;
+      badge.className = `ticket-status-pill is-${status.toLowerCase().replace(/\s+/g, '-')}`;
+      badge.textContent = `${statusIcons[status] || '⏳'} ${status}`;
 
       const cancelBtn = document.createElement('button');
       cancelBtn.type = 'button';
       cancelBtn.className = 'btn-ticket-cancel';
-      cancelBtn.textContent = 'Cancel';
+      cancelBtn.textContent = status === 'Rejected' ? 'Dismiss' : 'Cancel';
       cancelBtn.addEventListener('click', () => {
-        if (confirm(`Cancel reservation request for ${req.roomLabel}?`)) {
+        const question = status === 'Rejected'
+          ? `Remove the rejected request for ${req.roomLabel} from your list?`
+          : `Cancel reservation request for ${req.roomLabel}?`;
+        if (confirm(question)) {
+          // A confirmed request has a matching admin assignment; release the room too.
+          if (status === 'Confirmed') {
+            const remaining = roomUseRecords.filter((rec) => rec.requestId !== req.id);
+            if (remaining.length !== roomUseRecords.length) {
+              try {
+                window.localStorage.setItem(roomUseStorageKey, JSON.stringify(remaining));
+                roomUseRecords = remaining;
+              } catch (err) {
+                console.error('Error releasing room assignment', err);
+              }
+            }
+          }
           const filtered = userRequests.filter((r) => r.id !== req.id);
           saveRequests(filtered);
-          showToast(`Cancelled reservation for ${req.roomLabel}.`, 'error');
+          updateView();
+          showToast(status === 'Rejected' ? `Removed request for ${req.roomLabel}.` : `Cancelled reservation for ${req.roomLabel}.`, 'error');
         }
       });
 
