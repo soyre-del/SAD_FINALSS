@@ -1,0 +1,12 @@
+{
+  "name": "roomq",
+  "version": "1.0.0",
+  "description": "RoomQ - NORSU Classroom Operations & Availability Portal",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

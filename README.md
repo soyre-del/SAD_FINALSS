@@ -26,6 +26,26 @@ Designed for university scheduling staff and campus administrators:
 
 ---
 
+## 🚀 Running Locally
+
+Requires [Node.js](https://nodejs.org/) (no `npm install` needed — the server has zero dependencies).
+
+```powershell
+npm start
+```
+
+Or double-click **`start.bat`** (starts the server and opens the browser).
+
+| Page | URL |
+| --- | --- |
+| User portal | http://localhost:8002/user/ |
+| Admin portal | http://localhost:8002/admin/ |
+
+`http://localhost:8002/` redirects to the User portal. Stop the server with `Ctrl+C`.
+To use another port: `set PORT=8080 && npm start` (Command Prompt) or `$env:PORT=8080; npm start` (PowerShell).
+
+---
+
 ## 📁 File Structure
 
 ```text
@@ -55,6 +75,9 @@ SAD_FINAL/
 │   │   ├── roomq-time.js         # Time formatting and time picker
 │   │   └── script.js             # Common page controls
 │   └── images/                   # Campus and floor-plan images
+├── server.js                     # Local dev server (http://localhost:8002)
+├── package.json                  # npm start script
+├── start.bat                     # Double-click launcher for Windows
 └── README.md
 ```
 
